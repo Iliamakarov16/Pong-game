@@ -8,11 +8,13 @@ Color Dark_Green = Color{20, 160, 133, 255};
 Color Light_Green = Color{129, 204, 184, 255};
 Color Yellow = Color{243, 213, 91, 255};
 int main() {
-    //window set up
+    //Window set up
     const int screen_width = 1280;
     const int screen_height = 800;
     InitWindow(screen_width, screen_height, "Pong game");
     SetTargetFPS(60);
+
+    //Objects initialization
     Ball ball;
     Paddle player;
     CpuPaddle cpu;
@@ -26,21 +28,20 @@ int main() {
     player.update();
     cpu.update(ball);
     //Checking for collision
-    ball.onCollision(player, cpu);
+    ball.onCollision(player, cpu, 1.2f);
+
     //Drawing
-
-    
-
-
     ClearBackground(Dark_Green);
-
+    
+    //Field drawing
     DrawLine(screen_width / 2, 0, screen_width / 2, screen_height, WHITE);
     DrawRectangle(screen_width / 2, 0, screen_width / 2, screen_height, Green);
     DrawCircle(screen_width / 2, screen_height / 2, 150, Light_Green);
 
-    DrawText(TextFormat("%i", cpu.score_), screen_width/4 - 20, 20, 80, WHITE);
-    DrawText(TextFormat("%i", player.score_), 3*screen_width/4 - 20, 20, 80, WHITE);
-    
+    //Score drawing
+    DrawText(TextFormat("%i", cpu.score), screen_width/4 - 20, 20, 80, WHITE);
+    DrawText(TextFormat("%i", player.score), 3*screen_width/4 - 20, 20, 80, WHITE);
+    //Objects drawing
     ball.draw(Yellow);
     player.draw();
     cpu.draw();
@@ -50,3 +51,4 @@ int main() {
     CloseWindow();
     return 0; 
 }
+

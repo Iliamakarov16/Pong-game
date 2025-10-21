@@ -1,28 +1,29 @@
 #include "Paddle.hpp"
 
-Paddle::Paddle() : x_(GetScreenWidth() - 35), y_(GetScreenHeight() / 2), width_(25), height_(120), speed_(10){
+Paddle::Paddle() : x(GetScreenWidth() - 35), y(GetScreenHeight() / 2), width(25), height(120), speed(10){
 }
 
-Paddle::Paddle(const float& x, const float& y,const float& width, const float& height, const int& speed) : x_(x), y_(y), width_(width), height_(height), speed_(speed){
+Paddle::Paddle(const float& x, const float& y,const float& width, const float& height, const int& speed) : x(x), y(y), width(width), height(height), speed(speed){
 }
 
 void Paddle::draw(){
-    DrawRectangleRounded({x_, y_, width_, height_}, 0.8, 0, WHITE);
+    DrawRectangleRounded({x, y, width, height}, 0.8, 0, WHITE);
 }
 void Paddle::update(){
+    speed = speed; //Frame rate independent movement
     if (IsKeyDown(KEY_W)){//Moving up when W is pressed
-        y_ -= speed_;
+        y -= speed;
     }
     if (IsKeyDown(KEY_S)){//Moving down when S is pressed
-        y_ += speed_;
+        y += speed;
     }
     limitMovement();
 }
 void Paddle::limitMovement() {
-    if (y_ <= 0) {
-        y_ = 0;
+    if (y <= 0) {//Limits movement to upper screen bound
+        y = 0;
     }
-    if (y_ + height_ >= GetScreenHeight()) {
-        y_ = GetScreenHeight() - height_;
+    if (y + height >= GetScreenHeight()) {//Limits movement to lower screen bound
+        y = GetScreenHeight() - height;
     }
 }

@@ -1,29 +1,25 @@
 #include "CpuPaddle.hpp"
 #include "Ball.hpp"
 
-CpuPaddle::CpuPaddle() {
-    x_ = 10;
-    y_ = GetScreenHeight() / 2;
-    width_ = 25;
-    height_ = 120;
-    speed_ = 10;
+CpuPaddle::CpuPaddle() : Paddle(10, GetScreenHeight() / 2, 25, 120, 10) {
 }
 
-CpuPaddle::CpuPaddle(const float& x, const float& y,const float& width, const float& height, const int& speed) {
-    x_ = x;
-    y_ = y;
-    width_ = width;
-    height_ = height;
-    speed_ = speed;
-}
+CpuPaddle::CpuPaddle(const float& x, const float& y,const float& width, const float& height, const int& speed)
+: Paddle(x, y, width, height, speed) {}
+
 
 void CpuPaddle::update(Ball& ball){
 
-    if (y_ + height_ / 2 >= ball.y_){//Moves up when ball is higher than paddle
-        y_ -= speed_;
+    if (target_y + height / 2 >= ball.y){//Moves up when ball is higher than paddle
+        target_y -= speed;
     }
-    else if (y_ + height_ / 2 <= ball.y_){//Moves down when ball is lower than paddle
-        y_ += speed_;
+    else if (target_y + height / 2 <= ball.y){//Moves down when ball is lower than paddle
+        target_y += speed;
     }
-    limitMovement();
+
+    y = lerp(y, target_y, 0.2f);//Smoothing cpu's movement
+    limitMovement();//limits movement to screen bounds
+}
+float CpuPaddle::lerp(float start, float end, float t) {
+    return start + (end - start) * t;
 }
