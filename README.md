@@ -1,4 +1,4 @@
 How to play?
-There are two ways of playing this game:
-First: Open Pong.exe or PongMacOS depending on your platform.
-Second(if you want to change the project): Open the project with VS code, then enter main.code-workspace, After this you can press F5 to compile the code. 
+There are two ways to run this game:
+1. Open Pong.exe or PongMacOS depending on your platform.
+2. If you want to change the project, open the project with VS code and then enter workspace "main.code-workspace", After this you can press F5 to compile the code. 
