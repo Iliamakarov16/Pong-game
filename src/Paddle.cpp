@@ -10,7 +10,6 @@ void Paddle::draw(){
     DrawRectangleRounded({x, y, width, height}, 0.8, 0, WHITE);
 }
 void Paddle::update(){
-    speed = speed; //Frame rate independent movement
     if (IsKeyDown(KEY_W)){//Moving up when W is pressed
         y -= speed;
     }
